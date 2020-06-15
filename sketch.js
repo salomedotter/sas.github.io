@@ -26,6 +26,7 @@ const PARAMS = {
   WaveNumber: 2.01,
   Pulsation: 0.0,
   strokeWeight: 6,
+  WaveDistance: 1,
   Save: saveClicked,
 }
 
@@ -33,10 +34,12 @@ const PARAMS = {
 //======================================================================
 function setupGui(){
 	gui = new dat.GUI();
+    
 	gui.add(PARAMS, 'Amplitude').min(0).max(1)
 	gui.add(PARAMS, 'WaveNumber').min(0).max(10)
 	gui.add(PARAMS, 'Pulsation').min(-5).max(5)
 	gui.add(PARAMS, 'strokeWeight').min(0).max(20)
+    gui.add(PARAMS, 'WaveDistance').min(0).max(1.5)
 	gui.add(PARAMS, 'Save')
 }
 
@@ -79,8 +82,8 @@ function setupBGWaves(){
 
 function setup() {   
 	createCanvas(2/3*windowHeight,windowHeight)
-	setupBGWaves()
 	setupGui()
+    setupBGWaves()
 	setupLogo()
 	ticketText = new TicketText(0,width/2,width)
 	ticketText.font = logoFont
@@ -105,17 +108,25 @@ function checkParams(){
 	}
 }
 function setWaveParams(wave){
-	wave.amplitude = PARAMS.Amplitude;
-	wave.waveNumber = PARAMS.WaveNumber;
-	wave.pulse = TWO_PI*PARAMS.Pulsation;
-	wave.lineWidth = PARAMS.strokeWeight;
+	wave.amplitude = PARAMS.Amplitude
+	wave.waveNumber = PARAMS.WaveNumber
+	wave.pulse = TWO_PI*PARAMS.Pulsation
+	wave.lineWidth = PARAMS.strokeWeight
 }
 
 function setBGWaveParams(wave){
-	wave.amplitude = PARAMS.Amplitude;
-	wave.waveNumber = PARAMS.WaveNumber;
-	wave.pulse = TWO_PI*PARAMS.Pulsation;
+	wave.amplitude = PARAMS.Amplitude
+	wave.waveNumber = PARAMS.WaveNumber
+	wave.pulse = TWO_PI*PARAMS.Pulsation
+    //wave.y = PARAMS.WaveDistance
 }
+
+function setBGWaveDist(){
+    bgSquare.y = 1/3*height + waveDistance*PARAMS.WaveDistance
+    bgTriangle.y = 1/3*height + 2*waveDistance*PARAMS.WaveDistance
+    bgSawtooth.y = 1/3*height + 3*waveDistance*PARAMS.WaveDistance
+}
+
 
 function setLogoParams(){
 	setWaveParams(logo.sineWave)
@@ -130,6 +141,7 @@ function updateBGWaves(){
 	setBGWaveParams(bgSquare)
 	setBGWaveParams(bgTriangle)
 	setBGWaveParams(bgSawtooth)
+    setBGWaveDist()
 }
 
 function displayBGWaves(){
