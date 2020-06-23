@@ -5,7 +5,7 @@ class TicketText{
         this.y = y
         this.w = w
         this.computeDims()
-        this.text = "\nSpace Art Salomé\nJune 16, 10:00 AM\n1200.00 SEK\nStudent"
+        this.text = "\nMERCI\nJune 23, 14:00 AM\n1200.00 SEK\nStudent"
         this.font = textFont("Georgia")
 	}
     
