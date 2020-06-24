@@ -6,7 +6,7 @@ class Logo{
 		this.w = w
 		this.computeDims()
 		this.createWaves()
-		this.text = "SAS"
+		this.text = "MERCI"
 		this.font = textFont("Georgia")
 		
 	}
